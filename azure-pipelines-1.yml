@@ -1,0 +1,39 @@
+# Starter pipeline
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+
+
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# Restore those dependencies required for the Bot Logic
+steps:
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '*.sln'
+# Build the bot logic, packaging it as a zip file.
+# The reason we want a zip file is because we will
+# push the end result to Azure App Service.
+- task: VSBuild@1
+  displayName: 'Build solution application/*.sln'
+  inputs:
+    solution: '*.sln'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(Build.ArtifactStagingDirectory)/package/$(Build.BuildId).zip"'
+# Push the output of the Build Step (i.e. the zip
+# held in the package subdirectory of our staging directory
+# so that our release pipeline can access
+
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'applicationpackage'
+    publishLocation: 'Container'

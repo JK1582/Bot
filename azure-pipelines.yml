@@ -1,0 +1,45 @@
+resources:
+
+  pipelines:
+  - pipeline: ChatbotDev
+    source: ChatbotDev
+    trigger: 
+      branches:
+      - master
+
+pool: Default
+
+jobs:
+
+- deployment: QAPoolDeploy
+  displayName: Deploy to VM
+  pool: Default
+  environment: QA_Pool_Env
+
+  strategy:
+    runOnce:
+      deploy:   
+        steps:
+        - checkout: self 
+        - checkout: git://MEMIC Chat Bot/ChatbotDev@master
+        - task: PowerShell@2
+          inputs:
+            targetType: 'inline'
+            script: |
+              Set-Location "C:\Program Files\Python38\projects"
+              
+              python pyRun.py
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: 'restore'
+            projects: '**/*.sln'
+            feedsToUse: 'select'
+
+        - task: MSBuild@1
+          inputs:
+            solution: '**/*.sln'
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'tester'
+            publishLocation: 'pipeline'

@@ -1,0 +1,77 @@
+<script
+  crossorigin="anonymous"
+  src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"
+></script>
+<style type="text/css">html,
+  body {
+     height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+  .header {
+  padding: 0px;
+  text-align: center;
+  background: red;
+  color: white;
+  font-size: 12px;
+}
+</style>
+<meta charset="UTF-8">
+<title></title>
+<div id="webChat">&nbsp;</div>
+<script>
+            window.WebChat.renderWebChat(
+                {
+                    directLine: window.WebChat.createDirectLine({
+                        token: '16suSuebrLQ.A3S0IfE5dmFscJNWziiNzvWSeCDIs808PzxobM2gFfI'
+                    }),
+                    styleOptions: {
+                        rootHeight: '100%',
+                        rootWidth: '100%'
+                    },
+                    userID: 'HELLO',
+                    username: 'Web Chat User',
+                    locale: 'en-US'
+                },
+                document.getElementById('webChat')
+            );
+            document.querySelector('#webChat > *')
+
+            const webChat = document.getElementById('webChat');
+            webChat.setAttribute('style', 'position: fixed;width: auto;height: 40%;bottom: 4%;right:0px;margin-right:1px;');
+            const chatHeader = document.createElement('div')
+            chatHeader.setAttribute('style', 'background: aliceblue;border-width: 1px !important;border-style: solid !important;border: #2d84c6;position: relative;border-radius: 6px 0 0 0;height: 13%;width:100%;');
+       
+            const chatHeadIcon = document.createElement('img');
+            chatHeadIcon.setAttribute('src', 'https://i.imgur.com/nRghv9D.png');
+            chatHeadIcon.setAttribute('style', "width:auto;height:28px; float:left;");
+            chatHeader.appendChild(chatHeadIcon);
+            const chatHeadText = document.createElement('p');
+            chatHeadText.textContent = "Memic Chat Bot";
+            chatHeadText.setAttribute('style', 'color: black; position: absolute; width: max-content; display: flex; padding-left: 33%; ');
+            chatHeader.appendChild(chatHeadText)
+            const chatHeaderBtn = document.createElement('button')
+            chatHeaderBtn.setAttribute('style', 'float: right;border-radius: 4px 4px 4px 4px;background-color: red;border: whitesmoke;')
+            chatHeaderBtn.setAttribute('onclick', 'hide()')
+            chatHeaderBtn.innerText = "X"
+            chatHeader.appendChild(chatHeaderBtn);
+            webChat.prepend(chatHeader);
+            const chatHeaderBtnh = document.createElement('button')
+            chatHeaderBtnh.setAttribute('style', 'float: right;border-radius: 4px 4px 4px 4px;background-color: red;border: whitesmoke; display: none;')
+            chatHeaderBtnh.setAttribute('onclick', 'hide()')
+            chatHeaderBtnh.innerText = "X"
+
+        
+                function hide() {
+            var x = document.getElementById("webChat");
+              x.style.display = "none";
+              chatHeaderBtnh.style.display="float";
+
+            }
+            function show() {
+            var x = document.getElementById("webChat");
+              x.style.display = "none";
+            }
+          </script>

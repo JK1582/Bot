@@ -1,0 +1,102 @@
+<script
+  crossorigin="anonymous"
+  src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"
+></script>
+<style type="text/css">html,
+  body {
+     height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+  .header {
+  padding: 0px;
+  text-align: center;
+  background: #8B0000;
+  color: white;
+  font-size: 12px;
+  border-width: 5px !important;border-style: solid !important;border: #2d84c6;
+}
+<!-- Adds Hover and zoom -->
+img:hover{
+  transform: scale(1.2); 
+}
+</style>
+<meta charset="UTF-8">
+<title></title>
+<div id="webChat">&nbsp;</div>
+
+<div id="webChathidden">&nbsp;</div>
+<script>
+        <!-- Creates a WebChat with token -->
+        window.WebChat.renderWebChat(
+                {
+                    directLine: window.WebChat.createDirectLine({
+                        token: '16suSuebrLQ.A3S0IfE5dmFscJNWziiNzvWSeCDIs808PzxobM2gFfI'
+                    }),
+                    styleOptions: {
+                        rootHeight: '100%',
+                        rootWidth: '100%'
+                    },
+                    userID: 'HELLO',
+                    username: 'Web Chat User',
+                    locale: 'en-US'
+                },
+                document.getElementById('webChat')
+            );
+            document.querySelector('#webChat > *')
+            x = document.getElementsByClassName("webchat__send-box-text-box webchat--css-bpiuu-titn9n webchat--css-bpiuu-bdfbkn webchat__send-box__text-box");
+            x.style= 'padding-top:10px';
+
+
+            const webChat = document.getElementById('webChat');
+            <!-- Sets the webchat on the top -->
+            webChat.setAttribute('style', 'position: fixed;width: 300px;height: 400px;bottom: 70px;right:0px;margin-right:1px;z-index:69;');
+            const chatHeader = document.createElement('div')
+            chatHeader.setAttribute('style', 'background: aliceblue;border-width: 1px !important;border-style: solid !important;border: #2d84c6;position: relative;border-radius: 6px 0 0 0;height: 10%;width:100%;padding-top: 5px;');
+            <!-- Creates the img and adds style -->
+            const chatHeadIcon = document.createElement('img');
+            chatHeadIcon.setAttribute('src', 'https://i.imgur.com/nRghv9D.png');
+            chatHeadIcon.setAttribute('style', "width:auto;height:31px; float:left; padding-top: 2px; padding-bottom: 0px; padding-left: 6px; padding-right:12px;");
+            chatHeader.appendChild(chatHeadIcon);
+            const chatHeadText = document.createElement('p');
+            <!-- Creates the name and adds style -->
+            chatHeadText.textContent = "Memic Chat Bot";
+            chatHeadText.setAttribute('style', 'color: black; position: absolute; width: max-content; padding-left: 16.5%; font-size:20px; margin-top: 4px;');
+            chatHeader.appendChild(chatHeadText)
+            const chatHeaderBtn = document.createElement('button')
+            <!-- creates the close button -->
+            chatHeaderBtn.setAttribute('style', 'float: right; background-color: red; border: whitesmoke; font-size:17px; margin-top:3px;')
+            chatHeaderBtn.setAttribute('onclick', 'hide()')
+            chatHeaderBtn.innerText = "Close"
+            chatHeader.appendChild(chatHeaderBtn);
+            webChat.prepend(chatHeader);  
+            
+
+           <!-- This is when the chat bot is hidden -->
+            webChathidden.setAttribute('style', 'position: fixed;width: auto;height: 20px;bottom: 20%;right:0px;margin-right:1px; display: none; z-index:69;');
+            const chatHeaderhidden = document.createElement('div')   
+            const chatHeadIconhidden = document.createElement('img');
+            <!-- Adds image and style -->        
+            chatHeadIconhidden.setAttribute('src', 'https://i.imgur.com/nRghv9D.png');
+            chatHeadIconhidden.setAttribute('style', "width:auto;height:58px; float:left;padding-right:20px;");
+            chatHeaderhidden.appendChild(chatHeadIconhidden)
+            <!-- Adds close -->
+            chatHeadIconhidden.setAttribute('onclick', 'show()')
+            webChathidden.prepend(chatHeaderhidden);
+            <!-- function that hides -->
+                function hide() {
+            var x = document.getElementById("webChat");
+            var y = document.getElementById("webChathidden");
+            x.style.display = "none";
+            y.style.display= "";
+            }
+          <!-- function that shows -->
+            function show() {
+            var x = document.getElementById("webChat");
+            var y = document.getElementById("webChathidden");
+            x.style.display = "";
+            y.style.display = "none";
+            }
+          </script>
